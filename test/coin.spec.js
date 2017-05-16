@@ -149,4 +149,18 @@ describe('Класс Coin', () => {
       expect(newPosition).to.eql(realPosition.plus(springVector));
     });
   });
+
+  describe('Метод act', () => {
+    it('Обновит текущую позицию на ту что вернет getNextPosition', () => {
+      const time = 5;
+      const coin = new Coin(position);
+      const spring = coin.spring;
+      const newPosition = coin.getNextPosition(time);
+      coin.spring = spring;
+
+      coin.act(time);
+
+      expect(coin.pos).to.eql(newPosition);
+    });
+  });
 });
