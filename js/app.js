@@ -228,15 +228,6 @@ function initGameObjects() {
 
     var motion = new Vector(this.speed.x, 0).times(step);
     this.move(motion, level);
-    return;
-    var newPos = this.pos.plus(motion);
-    var obstacle = level.obstacleAt(newPos, this.size);
-    if (obstacle) {
-      level.playerTouched(obstacle);
-
-    }
-    else
-      this.pos = newPos;
   };
 
   Player.prototype.moveY = function (step, level, keys) {
@@ -245,21 +236,6 @@ function initGameObjects() {
 
     var motion = new Vector(0, this.speed.y).times(step);
     this.move(motion, level);
-    return;
-    var newPos = this.pos.plus(motion);
-    var obstacle = level.obstacleAt(newPos, this.size);
-    if (obstacle) {
-      level.playerTouched(obstacle);
-
-      if (keys.up && this.speed.y > 0) {
-        this.speed.y = -jumpSpeed;
-      } else {
-        this.speed.y = 0;
-      }
-
-    } else {
-      this.pos = newPos;
-    }
   };
 
   Player.prototype.act = function (step, level, keys) {

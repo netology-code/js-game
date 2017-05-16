@@ -46,7 +46,7 @@ describe('Класс Fireball', () => {
 
       const nextPosition = ball.getNextPosition();
 
-      expect(nextPosition).to.eql(position.plus(speed));
+      expect(nextPosition).to.eql(new Vector(6, 5));
     });
 
     it('Если передать время первым аргументом, то вернет новую позицию увелеченную на вектор скорости помноженный на переданное время', () => {
@@ -54,7 +54,7 @@ describe('Класс Fireball', () => {
 
       const nextPosition = ball.getNextPosition(time);
 
-      expect(nextPosition).to.eql(position.plus(speed.times(time)));
+      expect(nextPosition).to.eql(new Vector(10, 5));
     });
   });
 
@@ -64,7 +64,38 @@ describe('Класс Fireball', () => {
 
       ball.handleObstacle();
 
-      expect(ball.speed).to.eql(speed.times(-1));
+      expect(ball.speed).to.eql(new Vector(-1, -0));
+    });
+  });
+
+  describe('Метод act', () => {
+    it('Если препятствий нет, меняет позицию на ту что получена с помощью getNextPosition', () => {
+      const level = {
+        obstacleAt() {
+          return false;
+        }
+      };
+      const ball = new Fireball(position, speed);
+      const nextPosition = ball.getNextPosition(time);
+
+      ball.act(time, level);
+
+      expect(ball.speed).to.eql(speed);
+      expect(ball.pos).to.eql(nextPosition);
+    });
+
+    it('При столкновении с препятствием не меняет позицию объекта, меняет вектор скорости на противоположный', () => {
+      const level = {
+        obstacleAt() {
+          return true;
+        }
+      };
+      const ball = new Fireball(position, speed);
+
+      ball.act(time, level);
+
+      expect(ball.speed).to.eql(new Vector(-1, -0));
+      expect(ball.pos).to.eql(position);
     });
   });
 });

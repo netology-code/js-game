@@ -44,8 +44,8 @@ describe('Класс Vector', () => {
 
       const newPosition = position.plus(new Vector(left, top));
 
-      expect(newPosition.x).is.equal(x + left);
-      expect(newPosition.y).is.equal(y + top);
+      expect(newPosition.x).is.equal(8);
+      expect(newPosition.y).is.equal(17);
     });
   });
 
@@ -63,8 +63,8 @@ describe('Класс Vector', () => {
 
       const newPosition = position.times(n);
 
-      expect(newPosition.x).is.equal(x * n);
-      expect(newPosition.y).is.equal(y * n);
+      expect(newPosition.x).is.equal(15);
+      expect(newPosition.y).is.equal(35);
     });
   });
 

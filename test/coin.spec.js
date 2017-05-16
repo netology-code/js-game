@@ -24,7 +24,7 @@ describe('Класс Coin', () => {
 
     it('Реальная позициия сдвинута на Vector(0.2, 0.1)', () => {
       const coin = new Coin(position);
-      const realPosition = position.plus(new Vector(0.2, 0.1));
+      const realPosition = new Vector(5.2, 5.1);
 
       expect(coin.pos).to.eql(realPosition);
     });
@@ -55,7 +55,7 @@ describe('Класс Coin', () => {
 
       coin.updateSpring();
 
-      expect(coin.spring).to.equal(initialSpring + coin.springSpeed);
+      expect(coin.spring).to.equal(initialSpring + 8);
     });
 
     it('Если передать время, увеличит свойство spring на springSpeed умноженное на время', () => {
@@ -65,7 +65,7 @@ describe('Класс Coin', () => {
 
       coin.updateSpring(time);
 
-      expect(coin.spring).to.equal(initialSpring + (coin.springSpeed * time));
+      expect(coin.spring).to.equal(initialSpring + 40);
     });
   });
 
@@ -91,7 +91,7 @@ describe('Класс Coin', () => {
 
       const vector = coin.getSpringVector();
 
-      expect(vector.y).to.equal(Math.sin(coin.spring) * coin.springDist);
+      expect(vector.y).to.equal(Math.sin(coin.spring) * 0.07);
     });
   });
 
@@ -102,7 +102,7 @@ describe('Класс Coin', () => {
 
       coin.getNextPosition();
 
-      expect(coin.spring).to.equal(initialSpring + coin.springSpeed);
+      expect(coin.spring).to.equal(initialSpring + 8);
     });
 
     it('Если передать время, увеличит свойство spring на springSpeed умноженное на время', () => {
@@ -112,7 +112,7 @@ describe('Класс Coin', () => {
 
       coin.getNextPosition(time);
 
-      expect(coin.spring).to.equal(initialSpring + (coin.springSpeed * time));
+      expect(coin.spring).to.equal(initialSpring + 40);
     });
 
     it('Вернет вектор', () => {
