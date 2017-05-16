@@ -76,7 +76,7 @@ describe('Класс Fireball', () => {
         }
       };
       const ball = new Fireball(position, speed);
-      const nextPosition = ball.getNextPosition(time);
+      const nextPosition = new Vector(10, 5);
 
       ball.act(time, level);
 
@@ -96,6 +96,28 @@ describe('Класс Fireball', () => {
 
       expect(ball.speed).to.eql(new Vector(-1, -0));
       expect(ball.pos).to.eql(position);
+    });
+
+    it('Вызывает level.obstacleAt со своим вектором размера', () => {
+      const ball = new Fireball(position, speed);
+      const level = {
+        obstacleAt(pos, size) {
+          expect(size).to.eql(new Vector(1, 1));
+        }
+      };
+
+      ball.act(time, level);
+    });
+
+    it('Вызывает level.obstacleAt с вектором новой позиции', () => {
+      const ball = new Fireball(position, speed);
+      const level = {
+        obstacleAt(pos, size) {
+          expect(pos).to.eql(new Vector(10, 5));
+        }
+      };
+
+      ball.act(time, level);
     });
   });
 });

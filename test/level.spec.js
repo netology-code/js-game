@@ -221,6 +221,25 @@ describe('Класс Level', () => {
 
       expect(wall).to.be.equal('lava');
     });
+
+    it('Вернет строку wall если площадь пересекается со стеной и объект имеет не целочисленные координаты', () => {
+      const level = new Level(wallGrid);
+      const position = new Vector(0.5, 0.5);
+
+      const wall = level.obstacleAt(position, size);
+
+      expect(wall).to.be.equal('wall');
+    });
+
+    it('Вернет строку wall если площадь пересекается со стеной и объект имеет не целочисленный размер', () => {
+      const level = new Level(wallGrid);
+      const position = new Vector(0, 0);
+      const size = new Vector(0.5, 0.5);
+
+      const wall = level.obstacleAt(position, size);
+
+      expect(wall).to.be.equal('wall');
+    });
   });
 
   describe('Метод removeActor', () => {
