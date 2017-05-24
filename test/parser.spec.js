@@ -70,8 +70,8 @@ describe('Класс LevelParser', () => {
 
   describe('Метод createGrid', () => {
     const plan = [
-      'x x',
-      '!!!'
+      'x  x',
+      '!!!!'
     ];
 
     it('Вернет пустой массив, если передать пустой план', () => {
@@ -105,13 +105,7 @@ describe('Класс LevelParser', () => {
 
       const grid = parser.createGrid(plan);
 
-      grid.forEach((row, y) => {
-        row.forEach((cell, x) => {
-          if (plan[y][x] === 'x') {
-            expect(cell).to.equal('wall');
-          }
-        })
-      });
+      expect(grid[0]).to.eql(['wall',undefined,undefined,'wall']);
     });
 
     it('Символы ! определит как lava и поместит в соответствующую ячейку', () => {
@@ -119,21 +113,15 @@ describe('Класс LevelParser', () => {
 
       const grid = parser.createGrid(plan);
 
-      grid.forEach((row, y) => {
-        row.forEach((cell, x) => {
-          if (plan[y][x] === '!') {
-            expect(cell).to.equal('lava');
-          }
-        })
-      });
+      expect(grid[1]).to.eql(new Array(4).fill('lava'));
     });
   });
 
   describe('Метод createActors', () => {
     const plan = [
-      'o o',
-      ' z ',
-      'o o'
+      'o   o',
+      '  z  ',
+      'o   o'
     ];
     class MyActor {}
 
@@ -178,18 +166,18 @@ describe('Класс LevelParser', () => {
       const actors = parser.createActors(plan);
 
       expect(actors.some(actor => actor.pos.x === 0 && actor.pos.y === 0)).to.be.true;
-      expect(actors.some(actor => actor.pos.x === 2 && actor.pos.y === 0)).to.be.true;
-      expect(actors.some(actor => actor.pos.x === 1 && actor.pos.y === 1)).to.be.true;
+      expect(actors.some(actor => actor.pos.x === 4 && actor.pos.y === 0)).to.be.true;
+      expect(actors.some(actor => actor.pos.x === 2 && actor.pos.y === 1)).to.be.true;
       expect(actors.some(actor => actor.pos.x === 0 && actor.pos.y === 0)).to.be.true;
-      expect(actors.some(actor => actor.pos.x === 2 && actor.pos.y === 2)).to.be.true;
+      expect(actors.some(actor => actor.pos.x === 4 && actor.pos.y === 2)).to.be.true;
     });
   });
 
   describe('Метод parse', () => {
     const plan = [
-      'oxo',
-      'xzx',
-      'oxo'
+      ' oxo ',
+      '!xzx!',
+      ' oxo '
     ];
     class MyActor {}
 
@@ -206,7 +194,7 @@ describe('Класс LevelParser', () => {
 
       const level = parser.parse(plan);
 
-      expect(level.width).to.equal(plan.length);
+      expect(level.height).to.equal(3);
     });
 
     it('Ширина уровня будет равна количеству символов в максимальной строке плана', () => {
@@ -214,7 +202,7 @@ describe('Класс LevelParser', () => {
 
       const level = parser.parse(plan);
 
-      expect(level.height).to.equal(plan[0].length);
+      expect(level.width).to.equal(5);
     });
 
     it('Создаст уровень с движущимися объектами из плана', () => {
@@ -230,13 +218,11 @@ describe('Класс LevelParser', () => {
 
       const level = parser.parse(plan);
 
-      level.grid.forEach((row, y) => {
-        row.forEach((cell, x) => {
-          if (plan[y][x] === 'x') {
-            expect(cell).to.equal('wall');
-          }
-        })
-      });
+      expect(level.grid).to.eql([
+        [undefined, undefined,'wall',undefined,undefined],
+        ['lava','wall',undefined,'wall','lava'],
+        [undefined,undefined,'wall',undefined,undefined]
+      ]);
     });
   });
 });
