@@ -1,7 +1,24 @@
 'use strict';
 
 describe('Класс Level', () => {
-  const player = new Actor();
+  const Player = extend(Actor, { type: { value: 'player' }});
+  const Mushroom = extend(Actor, { type: { value: 'mushroom' }});
+  const Gift = extend(Actor, { type: { value: 'gift' }});
+  const Coin = extend(Actor, { type: { value: 'coin' }});
+
+  const player = new Player;
+  const mushroom = new Mushroom;
+  const giftBig = new Gift;
+  const giftSmall = new Gift;
+  const goldCoin = new Coin;
+  const bronzeCoin = new Coin;
+
+  player.title = 'Игрок';
+  mushroom.title = 'Гриб';
+  giftBig.title = 'Большой сюрприз';
+  giftSmall.title = 'Маленький сюрприз';
+  goldCoin.title = 'Золотая монета';
+  bronzeCoin.title = 'Бронзовая монета';
 
   describe('Конструктор new Level', () => {
     it('Высота пустого уровня равна 0', () => {
@@ -67,9 +84,7 @@ describe('Класс Level', () => {
     });
 
     it('Имеет свойство player, в котором движущийся объект со свойством type равным player', () => {
-      const player = { type: 'player', title: 'Игрок' };
-      const coin = { type: 'coin', title: 'Монетка' };
-      const level = new Level(undefined, [ player, coin ]);
+      const level = new Level(undefined, [ player, mushroom ]);
 
       expect(level.player).to.equal(player);
     });
@@ -105,10 +120,9 @@ describe('Класс Level', () => {
   });
 
   describe('Метод actorAt', () => {
-    const coin = new Actor();
 
     it('Выбросит исключение если передать не движущийся объект Actor', () => {
-      const level = new Level(undefined, [player]);
+      const level = new Level(undefined, [ player ]);
 
       function fn() {
         level.actorAt({});
@@ -126,7 +140,7 @@ describe('Класс Level', () => {
     });
 
     it('Вернет undefined для уровня в котором только один движущийся объект', () => {
-      const level = new Level(undefined, [player]);
+      const level = new Level(undefined, [ player ]);
 
       const noActor = level.actorAt(player);
 
@@ -134,8 +148,8 @@ describe('Класс Level', () => {
     });
 
     it('Вернет undefined если ни один объект игрового поля не пересекается с переданным объектом', () => {
-      const player = new Actor(new Vector(1, 1));
-      const level = new Level(undefined, [player, coin]);
+      const player = new Player(new Vector(1, 1));
+      const level = new Level(undefined, [ player, mushroom ]);
 
       const actor = level.actorAt(player);
 
@@ -143,11 +157,11 @@ describe('Класс Level', () => {
     });
 
     it('Вернет объект игрового поля, который пересекается с переданным объектом', () => {
-      const level = new Level(undefined, [player, coin]);
+      const level = new Level(undefined, [ player, mushroom ]);
 
       const actor = level.actorAt(player);
 
-      expect(actor).to.be.equal(coin);
+      expect(actor).to.be.equal(mushroom);
     });
 
   });
@@ -243,30 +257,24 @@ describe('Класс Level', () => {
   });
 
   describe('Метод removeActor', () => {
-    const coin = new Actor();
-    const lava = new Actor();
-
     it('Удаляет переданный движущийся объект', () => {
-      const level = new Level(undefined, [ coin, lava ]);
+      const level = new Level(undefined, [ mushroom, giftSmall ]);
 
-      level.removeActor(coin);
+      level.removeActor(mushroom);
 
-      expect(level.actors.includes(coin)).to.be.false;
+      expect(level.actors.includes(mushroom)).to.be.false;
     });
 
     it('Не удаляет остальные движущиеся объекты', () => {
-      const level = new Level(undefined, [ coin, lava ]);
+      const level = new Level(undefined, [ mushroom, giftSmall ]);
 
-      level.removeActor(coin);
+      level.removeActor(mushroom);
 
-      expect(level.actors.includes(lava)).to.be.true;
+      expect(level.actors.includes(giftSmall)).to.be.true;
     });
   });
 
   describe('Метод noMoreActors', () => {
-    const coin = { type: 'coin' };
-    const lava = { type: 'lava' };
-
     it('Вернет истину, если движущихся объектов нет в уровне', () => {
       const level = new Level();
 
@@ -274,21 +282,19 @@ describe('Класс Level', () => {
     });
 
     it('Вернет истину, если в уровне нет движущихся объектов заданного типа', () => {
-      const level = new Level(undefined, [ coin, lava ]);
+      const level = new Level(undefined, [ mushroom, giftSmall ]);
 
       expect(level.noMoreActors('actor')).to.be.true;
     });
 
     it('Вернет ложь, если в уровне есть движущихся объекты заданного типа', () => {
-      const level = new Level(undefined, [ coin, lava ]);
+      const level = new Level(undefined, [ mushroom, giftSmall ]);
 
-      expect(level.noMoreActors('coin')).to.be.false;
+      expect(level.noMoreActors('mushroom')).to.be.false;
     });
   });
 
   describe('Метод playerTouched', () => {
-    const goldCoin = { type: 'coin', title: 'Золото' };
-    const bronzeCoin = { type: 'coin', title: 'Бронза' };
 
     it('Если передать lava первым аргументом, меняет статус уровня на lost', () => {
       const level = new Level();
