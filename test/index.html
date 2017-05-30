@@ -14,6 +14,12 @@
     function loadLevels() {
       return Promise.reject();
     }
+
+    function extend(base, props = {}) {
+      const result = class extends base {};
+      Object.defineProperties(result.prototype, props);
+      return result;
+    }
   </script>
   <script src="../game.js"></script>
 
