@@ -512,8 +512,15 @@ const grid = [
   ['wall', 'wall']
 ];
 
-const goldCoin = { type: 'coin', title: 'Золото' };
-const bronzeCoin = { type: 'coin', title: 'Бронза' };
+function MyCoin(title) {
+  this.type = 'coin';
+  this.title = title;
+}
+MyCoin.prototype = Object.create(Actor);
+MyCoin.constructor = MyCoin;
+
+const goldCoin = new MyCoin('Золото');
+const bronzeCoin = new MyCoin('Бронза');
 const player = new Actor();
 const fireball = new Actor();
 
