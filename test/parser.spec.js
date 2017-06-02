@@ -174,6 +174,22 @@ describe('Класс LevelParser', () => {
       expect(actors).to.eql([]);
     });
 
+    it('Создает движущиеся объекты для конструктора Actor', () => {
+      const parser = new LevelParser({ z: Actor });
+
+      const actors = parser.createActors(['z']);
+
+      expect(actors).to.have.length(1);
+    });
+
+    it('Создает движущиеся объекты правильного типа для конструктора Actor ', () => {
+      const parser = new LevelParser({ z: Actor });
+
+      const actors = parser.createActors(['z']);
+
+      expect(actors[0]).to.be.an.instanceof(Actor);
+    });
+
     it('Создает движущиеся объекты для конструкторов типа Actor', () => {
       const parser = new LevelParser({ z: Mushroom });
 
