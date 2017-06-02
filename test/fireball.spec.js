@@ -104,24 +104,30 @@ describe('Класс Fireball', () => {
 
     it('Вызывает level.obstacleAt со своим вектором размера', () => {
       const ball = new Fireball(position, speed);
+      let isCalled = false;
       const level = {
         obstacleAt(pos, size) {
           expect(size).to.eql(new Vector(1, 1));
+          isCalled = true;
         }
       };
 
       ball.act(time, level);
+      expect(isCalled).to.be.true;
     });
 
     it('Вызывает level.obstacleAt с вектором новой позиции', () => {
       const ball = new Fireball(position, speed);
+      let isCalled = false;
       const level = {
         obstacleAt(pos, size) {
           expect(pos).to.eql(new Vector(10, 5));
+          isCalled = true;
         }
       };
 
       ball.act(time, level);
+      expect(isCalled).to.be.true;
     });
   });
 });
