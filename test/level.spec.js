@@ -6,19 +6,23 @@ describe('Класс Level', () => {
   const Gift = extend(Actor, { type: { value: 'gift' }});
   const Coin = extend(Actor, { type: { value: 'coin' }});
 
-  const player = new Player;
-  const mushroom = new Mushroom;
-  const giftBig = new Gift;
-  const giftSmall = new Gift;
-  const goldCoin = new Coin;
-  const bronzeCoin = new Coin;
+  let player, mushroom, giftBig, giftSmall, goldCoin, bronzeCoin;
 
-  player.title = 'Игрок';
-  mushroom.title = 'Гриб';
-  giftBig.title = 'Большой сюрприз';
-  giftSmall.title = 'Маленький сюрприз';
-  goldCoin.title = 'Золотая монета';
-  bronzeCoin.title = 'Бронзовая монета';
+  beforeEach(() => {
+    player = new Player;
+    mushroom = new Mushroom;
+    giftBig = new Gift;
+    giftSmall = new Gift;
+    goldCoin = new Coin;
+    bronzeCoin = new Coin;
+
+    player.title = 'Игрок';
+    mushroom.title = 'Гриб';
+    giftBig.title = 'Большой сюрприз';
+    giftSmall.title = 'Маленький сюрприз';
+    goldCoin.title = 'Золотая монета';
+    bronzeCoin.title = 'Бронзовая монета';
+  });
 
   describe('Конструктор new Level', () => {
     it('Высота пустого уровня равна 0', () => {
@@ -168,10 +172,14 @@ describe('Класс Level', () => {
 
   describe('Метод obstacleAt', () => {
     const gridSize = 2;
-    const grid = new Array(gridSize).fill(new Array(gridSize));
-    const wallGrid = new Array(gridSize).fill(new Array(gridSize).fill('wall'));
-    const lavaGrid = new Array(gridSize).fill(new Array(gridSize).fill('lava'));
-    const size = new Vector(1, 1);
+    let grid, wallGrid, lavaGrid, size;
+
+    beforeEach(() => {
+      grid = new Array(gridSize).fill(new Array(gridSize));
+      wallGrid = new Array(gridSize).fill(new Array(gridSize).fill('wall'));
+      lavaGrid = new Array(gridSize).fill(new Array(gridSize).fill('lava'));
+      size = new Vector(1, 1);
+    });
 
     it('Вернет undefined если объект не выходит за пределы уровня и ни с чем не пересекается', () => {
       const level = new Level(grid);

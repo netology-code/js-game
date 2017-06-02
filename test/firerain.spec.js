@@ -1,6 +1,12 @@
 'use strict';
 
 describe('Класс FireRain', () => {
+  let position;
+
+  beforeEach(() => {
+    position = new Vector(5, 5);
+  });
+
   describe('Конструктор new FireRain', () => {
     it('Создает экземпляр Fireball', () => {
       const ball = new FireRain();
@@ -22,8 +28,6 @@ describe('Класс FireRain', () => {
   });
 
   describe('Метод handleObstacle', () => {
-    const position = new Vector(5, 5);
-
     it('Не меняет вектор скорости', () => {
       const ball = new FireRain(position);
 

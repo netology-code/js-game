@@ -1,7 +1,11 @@
 'use strict';
 
 describe('Класс Coin', () => {
-  const position = new Vector(5, 5);
+  let position;
+
+  beforeEach(() => {
+    position = new Vector(5, 5);
+  });
 
   describe('Конструктор new Coin', () => {
     it('Создает экземпляр Actor', () => {

@@ -1,8 +1,12 @@
 'use strict';
 
 describe('Класс Actor', () => {
-  const position = new Vector(30, 50);
-  const size = new Vector(5, 5);
+  let position, size;
+
+  beforeEach(() => {
+    position = new Vector(30, 50);
+    size = new Vector(5, 5);
+  });
 
   describe('Конструктор new Actor()', () => {
     it('Создает объект со свойством pos, который является вектором', () => {

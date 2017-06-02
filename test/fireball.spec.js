@@ -1,9 +1,13 @@
 'use strict';
 
 describe('Класс Fireball', () => {
-  const time = 5;
-  const speed = new Vector(1, 0);
-  const position = new Vector(5, 5);
+  let time, speed, position;
+
+  beforeEach(() => {
+    time = 5;
+    speed = new Vector(1, 0);
+    position = new Vector(5, 5);
+  });
 
   describe('Конструктор new Fireball', () => {
     it('Созданный объект является экземпляром Actor', () => {

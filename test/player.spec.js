@@ -1,7 +1,11 @@
 'use strict';
 
 describe('Класс Player', () => {
-  const position = new Vector(10, 5);
+  let position;
+
+  beforeEach(() => {
+    position = new Vector(10, 5);
+  });
 
   describe('Конструктор', () => {
     it('Создает объект реальная позиция которого отличается от той что передана в конструктор на вектор 0:-0,5', () => {

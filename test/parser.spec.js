@@ -71,10 +71,14 @@ describe('Класс LevelParser', () => {
   });
 
   describe('Метод createGrid', () => {
-    const plan = [
-      'x  x',
-      '!!!!'
-    ];
+    let plan;
+
+    beforeEach(() => {
+      plan = [
+        'x  x',
+        '!!!!'
+      ];
+    });
 
     it('Вернет пустой массив, если передать пустой план', () => {
       const parser = new LevelParser();
@@ -120,11 +124,15 @@ describe('Класс LevelParser', () => {
   });
 
   describe('Метод createActors', () => {
-    const plan = [
-      'o   o',
-      '  z  ',
-      'o   o'
-    ];
+    let plan;
+
+    beforeEach(() => {
+      plan = [
+        'o   o',
+        '  z  ',
+        'o   o'
+      ];
+    });
 
     it('Вернет пустой массив, если передать пустой план', () => {
       const parser = new LevelParser({ o: Gift, z: Mushroom });
@@ -215,11 +223,15 @@ describe('Класс LevelParser', () => {
   });
 
   describe('Метод parse', () => {
-    const plan = [
-      ' oxo ',
-      '!xzx!',
-      ' oxo '
-    ];
+    let plan;
+
+    beforeEach(() => {
+      plan = [
+        ' oxo ',
+        '!xzx!',
+        ' oxo '
+      ];
+    });
 
     it('Вернет объект уровня, Level', () => {
       const parser = new LevelParser();
