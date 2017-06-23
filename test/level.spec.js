@@ -262,6 +262,70 @@ describe('Класс Level', () => {
 
       expect(wall).to.be.equal('wall');
     });
+
+    it('Объект не пересекается со стеной на которой стоит', () => {
+      const grid = [
+        Array(4),
+        Array(4),
+        Array(4),
+        Array(4).fill('wall')
+      ];
+      const level = new Level(grid);
+      const position = new Vector(2.1, 1.5);
+      const size = new Vector(0.8, 1.5);
+
+      const nothing = level.obstacleAt(position, size);
+
+      expect(nothing).to.be.undefined;
+    });
+
+    it('Объект не пересекается со стеной которая над ним', () => {
+      const grid = [
+        Array(4).fill('wall'),
+        Array(4),
+        Array(4),
+        Array(4)
+      ];
+      const level = new Level(grid);
+      const position = new Vector(2.1, 1);
+      const size = new Vector(0.8, 1.5);
+
+      const nothing = level.obstacleAt(position, size);
+
+      expect(nothing).to.be.undefined;
+    });
+
+    it('Объект не пересекается со стеной которая слева от него', () => {
+      const grid = [
+        Array(4),
+        ['wall', undefined, undefined, undefined],
+        Array(4),
+        Array(4)
+      ];
+      const level = new Level(grid);
+      const position = new Vector(1, 1.5);
+      const size = new Vector(0.8, 1.5);
+
+      const nothing = level.obstacleAt(position, size);
+
+      expect(nothing).to.be.undefined;
+    });
+
+    it('Объект не пересекается со стеной которая справа от него', () => {
+      const grid = [
+        Array(4),
+        [undefined, undefined, 'wall', undefined],
+        Array(4),
+        Array(4)
+      ];
+      const level = new Level(grid);
+      const position = new Vector(1.2, 1.5);
+      const size = new Vector(0.8, 1.5);
+
+      const nothing = level.obstacleAt(position, size);
+
+      expect(nothing).to.be.undefined;
+    });
   });
 
   describe('Метод removeActor', () => {
