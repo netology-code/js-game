@@ -152,6 +152,18 @@ describe('Класс Coin', () => {
 
       expect(newPosition).to.eql(realPosition.plus(springVector));
     });
+
+    it('Увеличивается вектор исходной позиции, а не текущей', () => {
+      const coin = new Coin(position);
+      const realPosition = coin.pos;
+      
+      coin.pos = coin.getNextPosition();
+
+      const newPosition = coin.getNextPosition();
+      const springVector = coin.getSpringVector();
+
+      expect(newPosition).to.eql(realPosition.plus(springVector));
+    });
   });
 
   describe('Метод act', () => {
