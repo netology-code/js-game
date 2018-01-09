@@ -76,7 +76,7 @@ describe('Класс Fireball', () => {
     it('Если препятствий нет, меняет позицию на ту что получена с помощью getNextPosition', () => {
       const level = {
         obstacleAt() {
-          return false;
+          return undefined;
         }
       };
       const ball = new Fireball(position, speed);
@@ -91,7 +91,7 @@ describe('Класс Fireball', () => {
     it('При столкновении с препятствием не меняет позицию объекта, меняет вектор скорости на противоположный', () => {
       const level = {
         obstacleAt() {
-          return true;
+          return 'wall';
         }
       };
       const ball = new Fireball(position, speed);
