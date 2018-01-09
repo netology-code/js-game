@@ -539,7 +539,7 @@ const bronzeCoin = new MyCoin('Бронза');
 const player = new Actor();
 const fireball = new Actor();
 
-const level = new Level(undefined, [ goldCoin, bronzeCoin, player, fireball ]);
+const level = new Level(grid, [ goldCoin, bronzeCoin, player, fireball ]);
 
 level.playerTouched('coin', goldCoin);
 level.playerTouched('coin', bronzeCoin);
