@@ -39,13 +39,13 @@ describe('Класс Actor', () => {
       expect(player.act).is.instanceof(Function);
     });
 
-    it('По умолчанию создается объект расположенный в точке 0:0', () => {
+    it('По умолчанию создается объект, расположенный в точке 0:0', () => {
       const player = new Actor();
 
       expect(player.pos).is.eql(new Vector(0, 0));
     });
 
-    it('По умолчанию создается объект расмером 1x1', () => {
+    it('По умолчанию создается объект размером 1x1', () => {
       const player = new Actor();
 
       expect(player.size).is.eql(new Vector(1, 1));
@@ -120,7 +120,7 @@ describe('Класс Actor', () => {
       expect(player.left).is.equal(30);
     });
 
-    it('Имеет свойство right, которое содержит координату правой границы объекта оп оси X', () => {
+    it('Имеет свойство right, которое содержит координату правой границы объекта по оси X', () => {
       const player = new Actor(position, size);
 
       expect(player.right).is.equal(35);
@@ -132,7 +132,7 @@ describe('Класс Actor', () => {
       expect(player.top).is.equal(50);
     });
 
-    it('Имеет свойство bottom, которое содержит координату правой границы объекта оп оси Y', () => {
+    it('Имеет свойство bottom, которое содержит координату нижней границы объекта по оси Y', () => {
       const player = new Actor(position, size);
 
       expect(player.bottom).is.equal(55);
@@ -140,7 +140,7 @@ describe('Класс Actor', () => {
   });
 
   describe('Метод isIntersect', () => {
-    it('Если передать объект не являющийся экземпляром Actor, то получим исключение', () => {
+    it('Если передать объект, не являющийся экземпляром Actor, то получим исключение', () => {
       const player = new Actor();
 
       function fn() {
@@ -158,7 +158,7 @@ describe('Класс Actor', () => {
       expect(notIntersected).is.equal(false);
     });
 
-    it('Объект не пересекается с объектом расположенным очень далеко', () => {
+    it('Объект не пересекается с объектом, расположенным очень далеко', () => {
       const player = new Actor(new Vector(0, 0));
       const coin = new Actor(new Vector(100, 100));
 
@@ -187,7 +187,7 @@ describe('Класс Actor', () => {
       });
     });
 
-    it('Объект не пересекается с объектом расположенным в той же точке, но имеющим отрицательный вектор размера', () => {
+    it('Объект не пересекается с объектом, расположенным в той же точке, но имеющим отрицательный вектор размера', () => {
       const player = new Actor(new Vector(0, 0), new Vector(1, 1));
       const coin = new Actor(new Vector(0, 0), new Vector(1, 1).times(-1));
 

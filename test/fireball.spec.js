@@ -16,19 +16,19 @@ describe('Класс Fireball', () => {
       expect(ball).to.be.an.instanceof(Actor);
     });
 
-    it('Имеет свойство type равное fireball', () => {
+    it('Имеет свойство type, равное fireball', () => {
       const ball = new Fireball();
 
       expect(ball.type).to.equal('fireball');
     });
 
-    it('Имеет свойство speed равное вектору Vector переданному вторым аргументом', () => {
+    it('Имеет свойство speed, равное вектору Vector, переданному вторым аргументом', () => {
       const ball = new Fireball(undefined, speed);
 
       expect(ball.speed).to.eql(speed);
     });
 
-    it('Свойство pos равно вектору Vector переданному первым аргументом', () => {
+    it('Свойство pos равно вектору Vector, переданному первым аргументом', () => {
       const ball = new Fireball(position);
 
       expect(ball.pos).to.equal(position);
@@ -53,7 +53,7 @@ describe('Класс Fireball', () => {
       expect(nextPosition).to.eql(new Vector(6, 5));
     });
 
-    it('Если передать время первым аргументом, то вернет новую позицию увелеченную на вектор скорости помноженный на переданное время', () => {
+    it('Если передать время первым аргументом, то вернет новую позицию, увеличенную на вектор скорости, помноженный на переданное время', () => {
       const ball = new Fireball(position, speed);
 
       const nextPosition = ball.getNextPosition(time);
@@ -73,10 +73,10 @@ describe('Класс Fireball', () => {
   });
 
   describe('Метод act', () => {
-    it('Если препятствий нет, меняет позицию на ту что получена с помощью getNextPosition', () => {
+    it('Если препятствий нет, меняет позицию на ту, что получена с помощью getNextPosition', () => {
       const level = {
         obstacleAt() {
-          return undefined;
+          return false;
         }
       };
       const ball = new Fireball(position, speed);
@@ -91,7 +91,7 @@ describe('Класс Fireball', () => {
     it('При столкновении с препятствием не меняет позицию объекта, меняет вектор скорости на противоположный', () => {
       const level = {
         obstacleAt() {
-          return 'wall';
+          return true;
         }
       };
       const ball = new Fireball(position, speed);

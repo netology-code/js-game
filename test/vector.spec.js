@@ -4,14 +4,14 @@ describe('Класс Vector', () => {
   const x = 3, y = 7, left = 5, top = 10, n = 5;
 
   describe('Конструктор new Vector()', () => {
-    it('создает объект со свойствами x и y равными аргументам конструктора', () => {
+    it('создает объект со свойствами x и y, равными аргументам конструктора', () => {
       const position = new Vector(left, top);
 
       expect(position.x).is.equal(left);
       expect(position.y).is.equal(top);
     });
 
-    it('без аргументов создает объект со свойствами x и y равными 0', () => {
+    it('без аргументов создает объект со свойствами x и y, равными 0', () => {
       const position = new Vector();
 
       expect(position.x).is.equal(0);
@@ -39,7 +39,7 @@ describe('Класс Vector', () => {
       expect(newPosition).is.instanceof(Vector);
     });
 
-    it('координаты нового вектора равны сумме координат суммируемых', () => {
+    it('координаты нового вектора равны сумме координат суммируемых векторов', () => {
       const position = new Vector(x, y);
 
       const newPosition = position.plus(new Vector(left, top));
@@ -58,7 +58,7 @@ describe('Класс Vector', () => {
       expect(newPosition).is.instanceof(Vector);
     });
 
-    it('координаты нового вектора увеличины в n раз', () => {
+    it('координаты нового вектора увеличены в n раз', () => {
       const position = new Vector(x, y);
 
       const newPosition = position.times(n);

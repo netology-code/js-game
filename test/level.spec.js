@@ -68,26 +68,26 @@ describe('Класс Level', () => {
       expect(level.width).to.equal(maxCells);
     });
 
-    it('Имеет свойство status равное null', () => {
+    it('Имеет свойство status, равное null', () => {
       const level = new Level();
 
       expect(level.status).to.be.null;
     });
 
-    it('Имеет свойство finishDelay равное 1', () => {
+    it('Имеет свойство finishDelay, равное 1', () => {
       const level = new Level();
 
       expect(level.finishDelay).to.equal(1);
     });
 
-    it('Имеет свойство actors, в котором все движущиеся переданные в конструктор', () => {
+    it('Имеет свойство actors, в котором все движущиеся объекты, переданные в конструктор', () => {
       const actors = [ player ];
       const level = new Level(undefined, actors);
 
       expect(level.actors).to.eql(actors);
     });
 
-    it('Имеет свойство player, в котором движущийся объект со свойством type равным player', () => {
+    it('Имеет свойство player, в котором движущийся объект со свойством type, равным player', () => {
       const level = new Level(undefined, [ player, mushroom ]);
 
       expect(level.player).to.equal(player);
@@ -103,7 +103,7 @@ describe('Класс Level', () => {
       expect(isNotFinished).to.be.false;
     });
 
-    it('Вернут true, если status будет не равен null, и finishDelay меньше нуля', () => {
+    it('Вернет true, если status будет не равен null, и finishDelay меньше нуля', () => {
       const level = new Level();
 
       level.status = 'lost';
@@ -113,7 +113,7 @@ describe('Класс Level', () => {
       expect(isFinished).to.be.true;
     });
 
-    it('Вернут false, если status будет не равен null, но finishDelay будет больше нуля', () => {
+    it('Вернет false, если status будет не равен null, но finishDelay будет больше нуля', () => {
       const level = new Level();
 
       level.status = 'lost';
@@ -125,7 +125,7 @@ describe('Класс Level', () => {
 
   describe('Метод actorAt', () => {
 
-    it('Выбросит исключение если передать не движущийся объект Actor', () => {
+    it('Выбросит исключение, если передать не движущийся объект Actor', () => {
       const level = new Level(undefined, [ player ]);
 
       function fn() {
@@ -143,7 +143,7 @@ describe('Класс Level', () => {
       expect(noActor).to.be.undefined;
     });
 
-    it('Вернет undefined для уровня в котором только один движущийся объект', () => {
+    it('Вернет undefined для уровня, в котором только один движущийся объект', () => {
       const level = new Level(undefined, [ player ]);
 
       const noActor = level.actorAt(player);
@@ -151,7 +151,7 @@ describe('Класс Level', () => {
       expect(noActor).to.be.undefined;
     });
 
-    it('Вернет undefined если ни один объект игрового поля не пересекается с переданным объектом', () => {
+    it('Вернет undefined, если ни один объект игрового поля не пересекается с переданным объектом', () => {
       const player = new Player(new Vector(1, 1));
       const level = new Level(undefined, [ player, mushroom ]);
 
@@ -181,7 +181,7 @@ describe('Класс Level', () => {
       size = new Vector(1, 1);
     });
 
-    it('Вернет undefined если объект не выходит за пределы уровня и ни с чем не пересекается', () => {
+    it('Вернет undefined, если объект не выходит за пределы уровня и ни с чем не пересекается', () => {
       const level = new Level(grid);
       const position = new Vector(0, 0);
 
@@ -190,7 +190,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.undefined;
     });
 
-    it('Вернет строку wall если левая граница объекта выходит за пределы уровня', () => {
+    it('Вернет строку wall, если левая граница объекта выходит за пределы уровня', () => {
       const level = new Level(grid);
       const position = new Vector(-1, 0);
 
@@ -199,7 +199,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Вернет строку wall если правая граница объекта выходит за пределы уровня', () => {
+    it('Вернет строку wall, если правая граница объекта выходит за пределы уровня', () => {
       const level = new Level(grid);
       const position = new Vector(gridSize, 0);
 
@@ -208,7 +208,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Вернет строку wall если верхняя граница объекта выходит за пределы уровня', () => {
+    it('Вернет строку wall, если верхняя граница объекта выходит за пределы уровня', () => {
       const level = new Level(grid);
       const position = new Vector(0, -1);
 
@@ -217,7 +217,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Вернет строку lava если нижняя граница объекта выходит за пределы уровня', () => {
+    it('Вернет строку lava, если нижняя граница объекта выходит за пределы уровня', () => {
       const level = new Level(grid);
       const position = new Vector(0, gridSize);
 
@@ -226,7 +226,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('lava');
     });
 
-    it('Вернет строку wall если площадь пересекается со стеной', () => {
+    it('Вернет строку wall, если площадь пересекается со стеной', () => {
       const level = new Level(wallGrid);
       const position = new Vector(0, 0);
 
@@ -235,7 +235,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Вернет строку lava если площадь пересекается с лавой', () => {
+    it('Вернет строку lava, если площадь пересекается с лавой', () => {
       const level = new Level(lavaGrid);
       const position = new Vector(0, 0);
 
@@ -244,7 +244,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('lava');
     });
 
-    it('Вернет строку wall если площадь пересекается со стеной и объект имеет не целочисленные координаты', () => {
+    it('Вернет строку wall, если площадь пересекается со стеной и объект имеет нецелочисленные координаты', () => {
       const level = new Level(wallGrid);
       const position = new Vector(0.5, 0.5);
 
@@ -253,7 +253,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Вернет строку wall если площадь пересекается со стеной и объект имеет не целочисленный размер', () => {
+    it('Вернет строку wall, если площадь пересекается со стеной и объект имеет нецелочисленный размер', () => {
       const level = new Level(wallGrid);
       const position = new Vector(0, 0);
       const size = new Vector(0.5, 0.5);
@@ -263,7 +263,7 @@ describe('Класс Level', () => {
       expect(wall).to.be.equal('wall');
     });
 
-    it('Объект не пересекается со стеной на которой стоит', () => {
+    it('Объект не пересекается со стеной, на которой стоит', () => {
       const grid = [
         Array(4),
         Array(4),
@@ -279,7 +279,7 @@ describe('Класс Level', () => {
       expect(nothing).to.be.undefined;
     });
 
-    it('Объект не пересекается со стеной которая над ним', () => {
+    it('Объект не пересекается со стеной, которая над ним', () => {
       const grid = [
         Array(4).fill('wall'),
         Array(4),
@@ -295,7 +295,7 @@ describe('Класс Level', () => {
       expect(nothing).to.be.undefined;
     });
 
-    it('Объект не пересекается со стеной которая слева от него', () => {
+    it('Объект не пересекается со стеной, которая слева от него', () => {
       const grid = [
         Array(4),
         ['wall', undefined, undefined, undefined],
@@ -311,7 +311,7 @@ describe('Класс Level', () => {
       expect(nothing).to.be.undefined;
     });
 
-    it('Объект не пересекается со стеной которая справа от него', () => {
+    it('Объект не пересекается со стеной, которая справа от него', () => {
       const grid = [
         Array(4),
         [undefined, undefined, 'wall', undefined],
@@ -359,7 +359,7 @@ describe('Класс Level', () => {
       expect(level.noMoreActors('actor')).to.be.true;
     });
 
-    it('Вернет ложь, если в уровне есть движущихся объекты заданного типа', () => {
+    it('Вернет ложь, если в уровне есть движущиеся объекты заданного типа', () => {
       const level = new Level(undefined, [ mushroom, giftSmall ]);
 
       expect(level.noMoreActors('mushroom')).to.be.false;
