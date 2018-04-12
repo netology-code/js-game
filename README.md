@@ -88,7 +88,7 @@
 1. Зарегистрироваться на сервисе [CodePen].
 2. Открыть заготовку проекта по ссылке:
 
-  https://codepen.io/dfitiskin/pen/XRZqWd?editors=0010
+  https://codepen.io/Netology/pen/QmPgWe?editors=0010
 
 3. Нажать кнопку «Fork», тем самым создав свою копию заготовки.
 4. Реализовать код игры, последовательно следуя инструкции, в окне «JS».
@@ -96,7 +96,7 @@
 6. Отправляйте наставнику на проверку ссылку на ваш пен.
 
 Инструкция по использованию сервиса CodePen:
-https://netology-university.bitbucket.io/wm/resourses/codepen-guide.html
+https://github.com/netology-code/guides/tree/master/codepen
 
 #### Repl.it
 
