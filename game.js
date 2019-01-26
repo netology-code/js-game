@@ -8,18 +8,15 @@ class Vector {
   }
 
   plus(vector) {
-    try {
-      if (!Vector.prototype.isPrototypeOf(vector)) {
-        throw "передан неправильный агрумент, нужен вектор";
-      } 
-      let sum = new Vector(this.x+vector.x, this.y+vector.y);
-      return sum;
-    }
-    catch (err) {
-      console.log(`Возникла ошибка: ${err}`);
-    }
+      if (!(vector instanceof Vector)) {
+        throw new Error('передан неправильный агрумент, нужен вектор);
+      }
+	  
+      else {
+		  return sum = new Vector(this.x+vector.x, this.y+vector.y);
+		}
   }
-
+  
   times(multiplier) {
     let result = new Vector(this.x*multiplier, this.y*multiplier);
     return result;
@@ -360,4 +357,37 @@ class Player extends Actor {
       this.type = player;
   }
 }
+
+
+
+const schemas = [
+  [
+    '         ',
+    '         ',
+    '    =    ',
+    '       o ',
+    '     !xxx',
+    ' @       ',
+    'xxx!     ',
+    '         '
+  ],
+  [
+    '      v  ',
+    '    v    ',
+    '  v      ',
+    '        o',
+    '        x',
+    '@   x    ',
+    'x        ',
+    '         '
+  ]
+];
+const actorDict = {
+  '@': Player,
+  'v': FireRain
+}
+const parser = new LevelParser(actorDict);
+runGame(schemas, parser, DOMDisplay)
+  .then(() => console.log('Вы выиграли приз!'));
+
 
