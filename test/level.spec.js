@@ -391,6 +391,7 @@ describe('Класс Level', () => {
 
       expect(level.actors).to.have.length(1);
       expect(level.actors).to.not.include(goldCoin);
+      expect(level.status).to.equal(null);
     });
 
     it('Если удалить все монеты, то статус меняется на won', () => {
@@ -398,6 +399,46 @@ describe('Класс Level', () => {
 
       level.playerTouched('coin', goldCoin);
       level.playerTouched('coin', bronzeCoin);
+
+      expect(level.status).to.equal('won');
+    });
+
+    it('Если удалить все монеты после касания lava, статус уровня остается lost', () => {
+      const level = new Level(undefined, [ goldCoin, bronzeCoin ]);
+
+      level.playerTouched('lava');
+      level.playerTouched('coin', goldCoin);
+      level.playerTouched('coin', bronzeCoin);
+
+      expect(level.status).to.equal('lost');
+    });
+
+    it('Если удалить все монеты после касания fireball, статус уровня остается lost', () => {
+      const level = new Level(undefined, [ goldCoin, bronzeCoin ]);
+
+      level.playerTouched('fireball');
+      level.playerTouched('coin', goldCoin);
+      level.playerTouched('coin', bronzeCoin);
+
+      expect(level.status).to.equal('lost');
+    });
+
+    it('Если коснуться lava после удаления всех монет, статус уровня остается won', () => {
+      const level = new Level(undefined, [ goldCoin, bronzeCoin ]);
+
+      level.playerTouched('coin', goldCoin);
+      level.playerTouched('coin', bronzeCoin);
+      level.playerTouched('lava');
+
+      expect(level.status).to.equal('won');
+    });
+
+    it('Если коснуться fireball после удаления всех монет, статус уровня остается won', () => {
+      const level = new Level(undefined, [ goldCoin, bronzeCoin ]);
+
+      level.playerTouched('coin', goldCoin);
+      level.playerTouched('coin', bronzeCoin);
+      level.playerTouched('fireball');
 
       expect(level.status).to.equal('won');
     });
